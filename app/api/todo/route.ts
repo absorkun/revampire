@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 
-export async function GET(_request: Request) {
+export async function GET() {
     const todos = await prisma.todo.findMany()
     if (!todos) {
         return Response.json("Error kenapa ya")
