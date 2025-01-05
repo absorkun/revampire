@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma"
 
-export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
     const id = (await params).id
     const todo = await prisma.todo.findFirst({
         where: {
@@ -22,7 +22,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     return Response.json("Updated")
 }
 
-export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(_request: Request, { params }: { params: Promise<{ id: string }> }) {
     const id = (await params).id
     await prisma.todo.delete({
         where: {

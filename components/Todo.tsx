@@ -39,7 +39,11 @@ export default function TodoComponent() {
             .then(res => res.json())
             .then(() => setNewData({ title: "", done: false }))
             .catch(e => setError(e.message))
-            .finally(() => setLoading(false))
+            .finally(() => {
+                setLoading(false)
+                fetchData()
+
+            })
     }
 
     const updateData = async (id: string, newDone: boolean) => {
@@ -52,8 +56,10 @@ export default function TodoComponent() {
             body: JSON.stringify({ done: newDone })
         })
             .catch(e => setError(e))
-            .finally(() => setLoading(false))
-        fetchData()
+            .finally(() => {
+                setLoading(false)
+                fetchData()
+            })
     }
 
     const deleteData = async (id: string) => {
@@ -63,14 +69,16 @@ export default function TodoComponent() {
         })
             .then(res => res.json())
             .catch(e => setError(e))
-            .finally(() => setLoading(false))
-        fetchData()
+            .finally(() => {
+                setLoading(false)
+                fetchData()
+
+            })
     }
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault()
         addData()
-        fetchData()
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
